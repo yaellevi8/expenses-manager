@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from "react";
-import Filter from "./Filter";
-import AddItem from "./AddItem";
-import ExpenseCounter from "./ExpenseCounter";
-import {addCost, deleteCost, getAllCosts, openCostsDB} from "../idb";
+import './Table.css';
+import Filter from "../Filter/Filter";
+import AddItem from "../AddItem/AddItem";
+import ExpenseCounter from "../ExpenseCounter/ExpenseCounter";
+import {addCost, deleteCost, getAllCosts, openCostsDB} from "../../idb";
 import Card from "@mui/joy/Card";
 import Table from '@mui/joy/Table';
 import Typography from "@mui/joy/Typography";
@@ -245,17 +246,17 @@ export default function StyledTable() {
     };
 
     return (
-        <div style={{margin: 'auto'}}>
-            <ExpenseCounter totalPrice={totalPrice}/>
-            <Card variant="outlined" sx={{ marginTop: '10px', marginBottom: '10px', marginLeft: '20px', marginRight: '20px'}}>
-                <Typography variant="h4" fontWeight="bold">
+        <div className="expense-counter">
+            <ExpenseCounter totalPrice={totalPrice} />
+            <Card className="expense-card">
+                <Typography className="custom-typography">
                     Expenses
                 </Typography>
-                <ButtonGroup >
-                    <AddItem addNewItem={addNewItem}/>
-                    <Filter filterTable={filterTable}/>
+                <ButtonGroup>
+                    <AddItem addNewItem={addNewItem} />
+                    <Filter filterTable={filterTable} />
                 </ButtonGroup>
-                <Table variant="outlined" aria-label="simple table" sx={{ margin: 'auto' }}>
+                <Table variant="outlined" aria-label="simple table" className="table">
                     <thead>
                     <tr>
                         <th style={{ width: '10%' }}>Date</th>
@@ -270,25 +271,23 @@ export default function StyledTable() {
                     {rowData.map((row, index) => (
                         <tr key={index}>
                             <td>{row.date}</td>
-                            <td style={{ overflowX: 'auto' }}>{row.item}</td>
-                            <td style={{ overflowX: 'auto' }}>{row.price} $</td>
-                            <td> <div style={{ display: "flex", alignItems: "center" }}>
-                                    {icons[row.category]}
-                                    <span style={{ marginLeft: "8px" }}>{row.category}</span>
-                                </div></td>
-                            <td style={{ overflowX: 'auto' }}>{row.description}</td>
+                            <td className="overflow-cell">{row.item}</td>
+                            <td className="overflow-cell">{row.price} $</td>
                             <td>
-                                <ButtonGroup size="sm" variant="soft"
-                                             buttonFlex={1}
-                                             aria-label="radius button group"
-                                             sx={{
-                                                 p: 0.7,
-                                                 width: 100,
-                                                 maxWidth: '100%',
-                                                 resize: 'horizontal',
-                                                 marginLeft: 'auto',
-                                                 '--ButtonGroup-radius': '40px'
-                                             }}>
+                                <div className="table-cell">
+                                    {icons[row.category]}
+                                    <span className="category-label">{row.category}</span>
+                                </div>
+                            </td>
+                            <td className="overflow-cell">{row.description}</td>
+                            <td>
+                                <ButtonGroup
+                                    size="sm"
+                                    variant="soft"
+                                    buttonFlex={1}
+                                    aria-label="radius button group"
+                                    className="button-group"
+                                >
                                     <IconButton color="danger" onClick={() => deleteItem(row)}>
                                         <Delete />
                                     </IconButton>

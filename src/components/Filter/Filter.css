@@ -1,0 +1,25 @@
+button.submit-button {
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+button.submit-button:hover {
+    background-color: #0a5bbf;
+}
+
+button.showall-button {
+    background-color: #ccc;
+    color: #333;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+button.showall-button:hover {
+    background-color: #999;
+}

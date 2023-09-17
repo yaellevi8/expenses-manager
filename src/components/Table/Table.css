@@ -1,0 +1,47 @@
+body .expense-card {
+    margin: 10px 20px;
+    background-color: #ffffff; /* Add your desired background color here */
+    padding: 20px; /* Add padding for better spacing */
+}
+
+body .custom-typography {
+    color: #2196F3; /* Change this color to your desired text color */
+    font-weight: bold; /* Set the desired font weight */
+    font-size: 20px; /* Set the desired font size */
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+.expense-table {
+    margin: auto;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.expense-table th {
+    width: 10%;
+}
+
+.overflow-cell {
+    width: 30%;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.table-cell {
+    width: 10%;
+    display: flex;
+    align-items: center;
+}
+
+.icon {
+    margin-right: 8px;
+}
+
+.category-label {
+    margin-left: 8px;
+}

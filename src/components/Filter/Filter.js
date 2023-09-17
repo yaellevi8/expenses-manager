@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { createFilter } from './Table';
-import { MONTHS, YEARS } from "../utils/consts";
+import './Filter.css';
+import { createFilter } from '../Table/Table';
+import { MONTHS, YEARS } from "../../utils/consts";
 import Stack from '@mui/joy/Stack';
 import Button from '@mui/joy/Button';
 import Select from '@mui/joy/Select';
@@ -92,13 +93,13 @@ export default function Filter(props) {
                     ))}
                 </Select>
 
-                {/* Submit button */}
-                <Button type="submit"
-                        variant="outlined"
-                        color="neutral">Submit</Button>
+                {/* Submit button with class name */}
+                <Button type="submit" className="submit-button">
+                    Submit
+                </Button>
 
-                {/* Reset button */}
-                <Button type="button" variant="outlined" color="neutral" onClick={handleReset}>
+                {/* Reset button with class name */}
+                <Button type="button" className="showall-button" onClick={handleReset}>
                     Show all
                 </Button>
             </Stack>

@@ -1,5 +1,5 @@
 import React from "react";
-import { createItem } from './Table';
+import { createItem } from '../Table/Table';
 import { NumericFormat } from 'react-number-format';
 import PropTypes from 'prop-types';
 import Modal from '@mui/joy/Modal';

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import './ExpenseCounter.css';
 import Card from '@mui/joy/Card';
 import Typography from '@mui/joy/Typography';
 import CardContent from '@mui/joy/CardContent';
@@ -13,12 +14,12 @@ import CardContent from '@mui/joy/CardContent';
  */
 export default function ExpenseCounter({ totalPrice }) {
     return (
-        <div style={{ margin: "auto" }}>
-            <Card variant="outlined" sx={{ marginTop: '20px', marginLeft: '20px', marginRight: '20px' }}>
+        <div className="card-container">
+            <Card variant="outlined" className="card">
                 <div>
-                    <CardContent orientation="horizontal">
-                        <Typography fontWeight="bold">Total Price:</Typography>
-                        <Typography fontWeight="bold" variant="body-xs">
+                    <CardContent orientation="horizontal" className="card-content">
+                        <Typography className="total-price-label">Total Price:</Typography>
+                        <Typography className="total-price-value">
                             {totalPrice} $
                         </Typography>
                     </CardContent>

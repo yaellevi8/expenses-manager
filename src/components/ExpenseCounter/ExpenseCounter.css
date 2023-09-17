@@ -1,0 +1,24 @@
+.card-container {
+    margin: auto;
+}
+
+.card {
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.card-content {
+    display: flex;
+    flex-direction: row;
+}
+
+body .total-price-label {
+    font-size: larger;
+    font-weight: bold;
+    color: #2196F3;
+}
+
+body .total-price-value {
+    font-size: larger;
+}
