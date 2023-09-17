@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Table from "./components/Table/Table";
-import logo from './title_logo.png';
+import logo from './assets/title_logo.png';
 
 function App() {
     return (
