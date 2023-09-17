@@ -1,3 +1,28 @@
+.app-container {
+  padding: 20px;
+}
+
+/* Style the header as a flex container */
+.app-header {
+  display: flex;
+  align-items: center; /* Vertically align logo and title */
+  justify-content: center; /* Horizontally center logo and title */
+  margin-bottom: 20px; /* Add space between header and table */
+}
+
+/* Style the logo */
+.app-logo {
+  width: 45px; /* Adjust the width as needed */
+  height: auto; /* Maintain aspect ratio */
+  margin-right: 20px; /* Add space between logo and title */
+}
+
+/* Style the title */
+.app-title {
+  font-size: 24px;
+  color: #2196F3; /* Set your desired title color */
+}
+
 .App {
   text-align: center;
 }

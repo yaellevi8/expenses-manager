@@ -1,14 +1,8 @@
-/* AddItem.css */
-
-.add-item-container {
-    text-align: right;
-    position: relative;
-    margin-right: 20px;
-    margin-top: 10px;
-}
-
-.add-item-button {
-    background-color: transparent;
+body .add-item-button {
+    background-color: #d6d3d3;
+    position: absolute;
+    right: 20px;
+    top: 10px;
 }
 
 .modal {
@@ -19,9 +13,7 @@
 
 .sheet {
     max-width: 500px;
-    border-radius: 8px;
-    padding: 16px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
 }
 
 .form-input {
@@ -30,48 +22,19 @@
     margin-top: 20px;
 }
 
-.form-label {
+.custom-form-label {
     font-weight: bold;
-    font-size: 1.25rem;
-    margin-right: 10px;
-}
-
-.form-field,
-.select-category {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
-}
-
-.form-field input,
-.select-category select {
-    width: 100%;
-    border: none;
-    outline: none;
-    padding: 0;
-    margin: 0;
-}
-
-.select-category {
-    margin-left: 10px;
-    position: relative;
-}
-
-.select-category::before {
-    content: '\f107';
-    font-family: 'Material Icons';
-    font-size: 1.5rem;
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
 }
 
 .form-button-stack {
     margin-top: 20px;
-    background-color: #2196F3;
 }
 
-/* Additional styling can be added as needed */
+.form-button-stack button {
+    background-color: #2196F3;
+    color: white;
+}
+
+.form-button-stack button:hover {
+    background-color: #0a5bbf;
+}

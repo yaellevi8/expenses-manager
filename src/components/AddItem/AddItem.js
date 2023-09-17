@@ -1,4 +1,5 @@
 import React from "react";
+import "./AddItem.css";
 import { createItem } from '../Table/Table';
 import { NumericFormat } from 'react-number-format';
 import PropTypes from 'prop-types';
@@ -27,14 +28,13 @@ import HealthlIcon from '@material-ui/icons/LocalHospital';
  * @type {Array}
  */
 export const options = [
-    { label: 'Food', icon: <FoodIcon size="sm"/> },
-    { label: 'Health', icon: <HealthlIcon size="sm"/> },
-    { label: 'Education', icon: <EducationIcon size="sm"/> },
-    { label: 'Travel', icon: <TravelIcon size="sm"/> },
-    { label: 'Housing', icon: <HouseIcon size="sm"/>},
-    { label: 'Other', icon: <OtherIcon size="sm"/> }
+    { label: "Food", icon: <FoodIcon size="sm" /> },
+    { label: "Health", icon: <HealthlIcon size="sm" /> },
+    { label: "Education", icon: <EducationIcon size="sm" /> },
+    { label: "Travel", icon: <TravelIcon size="sm" /> },
+    { label: "Housing", icon: <HouseIcon size="sm" /> },
+    { label: "Other", icon: <OtherIcon size="sm" /> },
 ];
-
 
 /**
  * Adapts the NumericFormat component as a controlled input.
@@ -45,7 +45,7 @@ export const options = [
  */
 const NumericFormatAdapter = React.forwardRef(function NumericFormatAdapter(
     props,
-    ref,
+    ref
 ) {
     const { onChange, ...other } = props;
 
@@ -81,17 +81,15 @@ NumericFormatAdapter.propTypes = {
  * @returns {JSX.Element} The rendered AddItem component.
  */
 export default function AddItem(props) {
-    // Assuming you have access to props
     const { addNewItem } = props;
     const [open, setOpen] = React.useState(false);
     const [itemData, setItemData] = React.useState({
-        item: '',
-        date: '',
-        price: '',
-        description: '',
-        category: ''
+        item: "",
+        date: "",
+        price: "",
+        description: "",
+        category: "",
     });
-
 
     /**
      * Handles submission event -> trigger add new item.
@@ -103,12 +101,9 @@ export default function AddItem(props) {
         setOpen(false);
         console.log('Item data:', itemData);
         console.log('Item category:', itemData.category);
-
         const newItem = createItem(itemData.date, itemData.item, parseInt(itemData.price), itemData.category, itemData.description);
         console.log('newItem:', newItem);
-
         addNewItem(newItem);
-
         // Reset itemData to its initial state
         setItemData({
             item: '',
@@ -119,141 +114,122 @@ export default function AddItem(props) {
         });
     }
 
+
     return (
-        <React.Fragment>
-            {/* Simple Button */}
-            <Button style={{  position: 'absolute', right: '20px', top: '10px'}}
-                    variant="outlined"
-                    color="neutral"  startDecorator={<Add />}
-                    onClick={() => setOpen(true)}
+        <div className="add-item-container">
+            <Button
+                className="add-item-button"
+                variant="outlined"
+                startDecorator={<Add />}
+                onClick={() => setOpen(true)}
             >
                 Add Item
             </Button>
             <Modal
-                aria-labelledby="modal-title"
-                aria-describedby="modal-desc"
+                className="modal"
                 open={open}
                 onClose={() => setOpen(false)}
-                sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
             >
-                <Sheet
-                    variant="outlined"
-                    sx={{
-                        maxWidth: 500,
-                        borderRadius: 'md',
-                        p: 3,
-                        boxShadow: 'lg',
-                    }}
-                >
-                    <React.Fragment>
-                        <form
-                            onSubmit={(handleSubmit)}
-                        >
-                            <div id="item" style={{ display: 'flex', alignItems: 'center' }}>
-                                <Typography
-                                    fontWeight="bold"
-                                    variant="h4"
-                                    sx={{ marginRight: '10px' }} // Add some margin between text and input
-                                >
-                                    Item:
-                                </Typography>
-                                <Input required
-                                       placeholder="Type in here…"
-                                       value={itemData.item}
-                                       onChange={(e) => setItemData({ ...itemData, item: e.target.value })}
-                                       endDecorator={
-                                           <React.Fragment>
-                                               <Divider orientation="vertical" />
-                                               <Select
-                                                   required
-                                                   variant="plain"
-                                                   placeholder="Choose category"
-                                                   value={itemData.category.value}
-                                                   onChange={(e) => {
-                                                       setItemData({ ...itemData, category: e.target.outerText });
-                                                   }}
-                                               >
-                                                   {options.map((option, index) => (
-                                                       <React.Fragment key={index}>
-                                                           {index !== 0 ? (
-                                                               <ListDivider role="none" inset="startContent" />
-                                                           ) : null}
-                                                           <Option value={option}>
-                                                               <ListItemDecorator>
-                                                                   {option.icon}
-                                                               </ListItemDecorator>
-                                                               {option.label}
-                                                           </Option>
-                                                       </React.Fragment>
-                                                   ))}
-                                               </Select>
-                                           </React.Fragment>
-                                       }/>
-                            </div>
-                            <div id="date" style={{ display: 'flex', alignItems: 'center' }}>
-                                <Typography
-                                    fontWeight="bold"
-                                    variant="h4"
-                                    sx={{ marginRight: '10px', marginTop: '20px' }} // Add some margin between text and input
-                                >
-                                    Date:
-                                </Typography>
+                <Sheet className="sheet">
+                    <form onSubmit={handleSubmit}>
+                        <div className="form-input">
+                            <Typography
+                                className="custom-form-label"
+                            >
+                                Item:
+                            </Typography>
+                            <Input
+                                required
+                                placeholder="Type in here…"
+                                value={itemData.item}
+                                onChange={(e) => setItemData({ ...itemData, item: e.target.value })}
+                                endDecorator={
+                                    <div>
+                                        <Divider orientation="vertical" />
+                                        <Select
+                                            className="select-category"
+                                            required
+                                            variant="plain"
+                                            placeholder="Choose category"
+                                            value={itemData.category.value}
+                                            onChange={(e) => {
+                                                setItemData({ ...itemData, category: e.target.outerText });
+                                            }}
+                                        >
+                                            {options.map((option, index) => (
+                                                <React.Fragment key={index}>
+                                                    {index !== 0 ? (
+                                                        <ListDivider role="none" inset="startContent" />
+                                                    ) : null}
+                                                    <Option value={option}>
+                                                        <ListItemDecorator>
+                                                            {option.icon}
+                                                        </ListItemDecorator>
+                                                        {option.label}
+                                                    </Option>
+                                                </React.Fragment>
+                                            ))}
+                                        </Select>
+                                    </div>
+                                }
+                            />
+                        </div>
+                        <div className="form-input">
+                            <Typography
+                                className="custom-form-label"
+                            >
+                                Date:
+                            </Typography>
+                            <Input
+                                required
+                                type="date"
+                                value={itemData.date}
+                                onChange={(e) => setItemData({ ...itemData, date: e.target.value })}
+                            />
+                        </div>
+                        <div className="form-input">
+                            <Typography
+                                className="custom-form-label"
+                            >
+                                Price:
+                            </Typography>
+                            <FormControl>
                                 <Input
                                     required
-                                    type="date"
-                                    sx={{ marginTop: '20px' }}
-                                    value={itemData.date}
-                                    onChange={(e) => setItemData({ ...itemData, date: e.target.value })}
+                                    value={itemData.price}
+                                    onChange={(e) => setItemData({ ...itemData, price: e.target.value })}
+                                    placeholder="Amount"
+                                    slotProps={{
+                                        input: {
+                                            component: NumericFormatAdapter,
+                                            name: "price",
+                                        },
+                                    }}
+                                    startDecorator={"$"}
                                 />
-                            </div>
-                            <div id="price" style={{ display: 'flex', alignItems: 'center' }}>
-                                <Typography
-                                    fontWeight="bold"
-                                    variant="h4"
-                                    sx={{ marginRight: '10px', marginTop: '20px' }} // Add some margin between text and input
-                                >
-                                    Price:
-                                </Typography>
-                                <FormControl>
-                                    <Input
-                                        required
-                                        value={itemData.price}
-                                        onChange={(e) => setItemData({ ...itemData, price: e.target.value })}
-                                        placeholder="Amount"
-                                        slotProps={{
-                                            input: {
-                                                component: NumericFormatAdapter,
-                                                name: 'price',
-                                            },
-                                        }}
-                                        startDecorator={'$'}
-                                        sx={{ marginTop: '20px' }} />
-                                </FormControl>
-                            </div>
-                            <div id="description" style={{ display: 'flex', alignItems: 'center' }}>
-                                <Typography
-                                    fontWeight="bold"
-                                    variant="h4"
-                                    sx={{ marginRight: '10px', marginTop: '20px' }} // Add some margin between text and input
-                                >
-                                    Description:
-                                </Typography>
-                                <FormControl>
-                                    <Input
-                                        required
-                                        value={itemData.description}
-                                        onChange={(e) => setItemData({ ...itemData, description: e.target.value })}
-                                        placeholder="Description"
-                                        sx={{ marginTop: '20px' }} />
-                                </FormControl>
-                            </div>
-                            <Stack sx={{ marginTop: '20px' }}>
-                                <Button type="submit" style={{ backgroundColor: 'black', color: 'white' }} >Submit</Button>
-                            </Stack>
-                        </form>
-                    </React.Fragment>
+                            </FormControl>
+                        </div>
+                        <div className="form-input">
+                            <Typography
+                                className="custom-form-label"
+                            >
+                                Description:
+                            </Typography>
+                            <FormControl>
+                                <Input
+                                    required
+                                    value={itemData.description}
+                                    onChange={(e) => setItemData({ ...itemData, description: e.target.value })}
+                                    placeholder="Description"
+                                />
+                            </FormControl>
+                        </div>
+                        <Stack className="form-button-stack">
+                            <Button type="submit">Submit</Button>
+                        </Stack>
+                    </form>
                 </Sheet>
             </Modal>
-        </React.Fragment>
+        </div>
     );
 }
