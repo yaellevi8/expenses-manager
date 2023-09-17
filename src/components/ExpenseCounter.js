@@ -15,7 +15,7 @@ export default function ExpenseCounter({ totalPrice }) {
                     <CardContent orientation="horizontal">
                         <Typography fontSize="lg" fontWeight="lg">Total Price:</Typography>
                         <Typography fontSize="lg" fontWeight="lg" level="body-xs">
-                            {totalPrice} ₪
+                            {totalPrice} $
                         </Typography>
                     </CardContent>
                 </div>

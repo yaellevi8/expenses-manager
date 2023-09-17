@@ -32,19 +32,6 @@ export const options = [
     { label: 'Other', icon: <OtherIcon size="sm"/> }
 ];
 
-export function ViewOption({ option }) {
-    return (
-        <div style={{ display: "flex", alignItems: "center" }}>
-            {option.icon}
-            <span style={{ marginLeft: "8px" }}>{option.label}</span>
-        </div>
-    );
-}
-
-export function getObjectByLabel(labelToFind, optionsArray) {
-    return optionsArray.find(option => option.label === labelToFind);
-}
-
 
 const NumericFormatAdapter = React.forwardRef(function NumericFormatAdapter(
     props,
@@ -98,6 +85,15 @@ export default function AddItem(props) {
         console.log('newItem:', newItem);
 
         addNewRow(newItem);
+
+        // Reset itemData to its initial state
+        setItemData({
+            item: '',
+            date: '',
+            price: '',
+            description: '',
+            category: ''
+        });
     }
 
     return (
@@ -126,18 +122,7 @@ export default function AddItem(props) {
                         boxShadow: 'lg',
                     }}
                 >
-                    <ModalClose
-                        variant="outlined"
-                        sx={{
-                            top: 'calc(-1/4 * var(--IconButton-size))',
-                            right: 'calc(-1/4 * var(--IconButton-size))',
-                            boxShadow: '0 2px 12px 0 rgba(0 0 0 / 0.2)',
-                            borderRadius: '50%',
-                            bgcolor: 'background.surface',
-                        }}
-                    />
                     <React.Fragment>
-
                         <form
                             onSubmit={(handleSubmit)}
                         >
@@ -160,9 +145,10 @@ export default function AddItem(props) {
                                                <Select
                                                    required
                                                    variant="plain"
+                                                   placeholder="Choose category"
                                                    value={itemData.category.value}
                                                    onChange={(e) => {
-                                                       setItemData({ ...itemData, category: e.target.innerText });
+                                                       setItemData({ ...itemData, category: e.target.outerText });
                                                    }}
                                                >
                                                    {options.map((option, index) => (
@@ -219,7 +205,7 @@ export default function AddItem(props) {
                                                 component: NumericFormatAdapter,
                                             },
                                         }}
-                                        startDecorator={'₪'}
+                                        startDecorator={'$'}
                                         sx={{ marginTop: '20px' }} />
                                 </FormControl>
                             </div>

@@ -1,28 +1,20 @@
 import React, { useState, useEffect } from "react";
+import Filter from "./Filter";
+import AddItem from "./AddItem";
+import ExpenseCounter from "./ExpenseCounter";
+import {openCostsDB, getAllCosts, addCost, updateCost, deleteCost} from "../idb";
 import Card from "@mui/joy/Card";
 import Table from '@mui/joy/Table';
 import Typography from "@mui/joy/Typography";
-import AddItem, {CustomOption} from "./AddItem";
-import EditItem from "./EditItem";
-import Filter from "./Filter";
-import ExpenseCounter from "./ExpenseCounter";
-import ButtonGroup from '@mui/joy/ButtonGroup';
-import Button from '@mui/joy/Button';
 import IconButton from "@mui/joy/IconButton";
+import ButtonGroup from '@mui/joy/ButtonGroup';
 import Delete from '@mui/icons-material/Delete';
-import StarOutlineIcon from '@mui/icons-material/StarOutline';
-import Star from '@mui/icons-material/Star';
-import options from "./AddItem";
-import getObjectByLabel from "./AddItem";
-import ViewOption from "./AddItem";
-import {openCostsDB, getAllCosts, addCost, updateCost, deleteCost} from "../idb";
-import {MONTHS} from "../utils/consts";
-import FoodIcon from "@material-ui/icons/Fastfood";
-import HealthlIcon from "@material-ui/icons/LocalHospital";
-import EducationIcon from "@material-ui/icons/School";
-import TravelIcon from "@material-ui/icons/Explore";
 import HouseIcon from "@material-ui/icons/House";
+import FoodIcon from "@material-ui/icons/Fastfood";
+import TravelIcon from "@material-ui/icons/Explore";
 import OtherIcon from "@material-ui/icons/MoreHoriz";
+import EducationIcon from "@material-ui/icons/School";
+import HealthlIcon from "@material-ui/icons/LocalHospital";
 
 
 const icons = {
@@ -83,11 +75,6 @@ export default function StyledTable() {
         }
     };
 
-    const handleSortRequest = () => {
-        setRowData(sortArray(rowData, orderDirection));
-        setOrderDirection(orderDirection === "asc" ? "desc" : "asc");
-    };
-
     const filterTable = (filter) => {
         console.log('Filter in progress');
         setFilter(filter);
@@ -112,29 +99,27 @@ export default function StyledTable() {
     function filterDataByFilter(filter, data) {
         // If filter is null or undefined, return all data
         console.log('filter:', filter);
-        if (!filter) {
+        if (!filter || (filter.year === null && filter.month === null)) {
             return data;
         }
 
         // Apply filtering logic based on your filter object
-        // For example, you can filter by year and month
-        const  filteredData =  data.filter((row) => {
-
+        const filteredData = data.filter((row) => {
             const dateObject = new Date(row.date);
-
-
             const rowYear = dateObject.getFullYear();
             const rowMonth = dateObject.getMonth() + 1;
 
-            console.log('dateObject:', rowYear);
-            console.log('dateObject:', filter.year);
-            console.log('dateObject:', dateObject.getMonth() + 1);
-            console.log('dateObject:',  rowMonth);
-            console.log('------------------');
-
-            if (rowYear === filter.year && rowMonth === filter.month) {
+            if (filter.year === null && filter.month !== null) {
+                // Filter by month when year is null
+                return rowMonth === filter.month;
+            } else if (filter.year !== null && filter.month === null) {
+                // Filter by year when month is null
+                return rowYear === filter.year;
+            } else if (rowYear === filter.year && rowMonth === filter.month) {
+                // Filter by both year and month when both are specified
                 return true;
             }
+
             return false;
         });
 
@@ -188,29 +173,6 @@ export default function StyledTable() {
             });
     };
 
-    const toggleStar = (row) => {
-        // Create a copy of the row with the updated 'isStarred' property
-        const updatedRow = { ...row, isStarred: !row.isStarred };
-
-        // Use the 'updateCost' function to update the record in the database
-        updateCost(db, updatedRow)
-            .then(() => {
-                // Update the component state with the edited data
-                setRowData((prevRowData) => {
-                    return prevRowData.map((r) => {
-                        if (r === row) {
-                            return updatedRow;
-                        }
-                        return r;
-                    });
-                });
-                console.log('Star status updated successfully');
-            })
-            .catch((error) => {
-                console.error('Error updating star status:', error);
-            });
-    };
-
     const deleteRow = (rowToDelete) => {
         console.log('delete:', rowToDelete);
         // Use the callback function to access the updated rowData
@@ -258,10 +220,10 @@ export default function StyledTable() {
                     <thead>
                     <tr>
                         <th style={{ width: '10%' }}>Date</th>
-                        <th style={{ width: '20%' }}>Item</th>
-                        <th style={{ width: '20%' }}>Price</th>
-                        <th style={{ width: '20%' }}>Category</th>
-                        <th style={{ width: '20%' }}>Description</th>
+                        <th style={{ width: '30%' }}>Item</th>
+                        <th style={{ width: '10%' }}>Price</th>
+                        <th style={{ width: '10%' }}>Category</th>
+                        <th style={{ width: '30%' }}>Description</th>
                         <th style={{ width: '10%' }}></th>
                     </tr>
                     </thead>
@@ -269,13 +231,13 @@ export default function StyledTable() {
                     {rowData.map((row) => (
                         <tr key={row.item}>
                             <td>{row.date}</td>
-                            <td>{row.item}</td>
-                            <td>{row.price} ₪</td>
+                            <td style={{ overflowX: 'auto' }}>{row.item}</td>
+                            <td style={{ overflowX: 'auto' }}>{row.price} $</td>
                             <td> <div style={{ display: "flex", alignItems: "center" }}>
                                     {icons[row.category]}
                                     <span style={{ marginLeft: "8px" }}>{row.category}</span>
                                 </div></td>
-                            <td>{row.description}</td>
+                            <td style={{ overflowX: 'auto' }}>{row.description}</td>
                             <td>
                                 <ButtonGroup size="sm" variant="soft"
                                              buttonFlex={1}
