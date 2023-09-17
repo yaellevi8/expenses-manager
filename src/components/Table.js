@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, {useEffect, useState} from "react";
 import Filter from "./Filter";
 import AddItem from "./AddItem";
 import ExpenseCounter from "./ExpenseCounter";
-import {openCostsDB, getAllCosts, addCost, updateCost, deleteCost} from "../idb";
+import {addCost, deleteCost, getAllCosts, openCostsDB, updateCost} from "../idb";
 import Card from "@mui/joy/Card";
 import Table from '@mui/joy/Table';
 import Typography from "@mui/joy/Typography";
@@ -45,8 +45,7 @@ export default function StyledTable() {
         return getAllCosts(database)
             .then((data) => {
                 // Apply filtering logic based on the filter
-                const filteredData = filterDataByFilter(filter, data);
-                return filteredData; // Return the filtered data
+                return filterDataByFilter(filter, data); // Return the filtered data
             });
     };
 
@@ -114,6 +113,8 @@ export default function StyledTable() {
                 return rowMonth === filter.month;
             } else if (filter.year !== null && filter.month === null) {
                 // Filter by year when month is null
+                console.log('row year:', rowYear);
+                console.log('row year:', rowYear === filter.year);
                 return rowYear === filter.year;
             } else if (rowYear === filter.year && rowMonth === filter.month) {
                 // Filter by both year and month when both are specified
@@ -184,7 +185,7 @@ export default function StyledTable() {
         // Use the 'deleteCost' function to delete the record in the database
         deleteCost(db, recordIdToDelete)
             .then(() => {
-                console.log('db: ', db);
+                console.log('db: ', getAllCosts(db));
                 // Update the component state to remove the deleted record
                 setRowData((prevRowData) =>
                     prevRowData.filter((row) => row.id !== recordIdToDelete)
@@ -228,8 +229,8 @@ export default function StyledTable() {
                     </tr>
                     </thead>
                     <tbody>
-                    {rowData.map((row) => (
-                        <tr key={row.item}>
+                    {rowData.map((row, index) => (
+                        <tr key={index}>
                             <td>{row.date}</td>
                             <td style={{ overflowX: 'auto' }}>{row.item}</td>
                             <td style={{ overflowX: 'auto' }}>{row.price} $</td>
