@@ -35,3 +35,8 @@ body .custom-typography {
 .table-content{
     background-color: #fcfcfd;
 }
+
+.table .no-expenses-td {
+    background-color: white;
+    font-size: medium;
+}

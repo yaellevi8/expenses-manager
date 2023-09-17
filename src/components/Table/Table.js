@@ -258,43 +258,53 @@ export default function StyledTable() {
                 </ButtonGroup>
                 <Table variant="outlined" aria-label="simple table" className="table">
                     <thead>
-                    <tr>
-                        <th style={{ width: '15%' }}>Date</th>
-                        <th style={{ width: '20%' }}>Item</th>
-                        <th style={{ width: '20%' }}>Price</th>
-                        <th style={{ width: '15%' }}>Category</th>
-                        <th style={{ width: '20%' }}>Description</th>
-                        <th style={{ width: '10%' }}></th>
-                    </tr>
+                        <tr>
+                            <th style={{ width: '15%' }}>Date</th>
+                            <th style={{ width: '20%' }}>Item</th>
+                            <th style={{ width: '20%' }}>Price</th>
+                            <th style={{ width: '15%' }}>Category</th>
+                            <th style={{ width: '20%' }}>Description</th>
+                            <th style={{ width: '10%' }}></th>
+                        </tr>
                     </thead>
                     <tbody>
-                    {rowData.map((row, index) => (
-                        <tr key={index} className="table-content">
-                            <td>{row.date}</td>
-                            <td className="overflow-cell">{row.item}</td>
-                            <td className="overflow-cell">{row.price} $</td>
-                            <td>
-                                <div className="table-cell">
-                                    {icons[row.category]}
-                                    <span className="category-label">{row.category}</span>
-                                </div>
-                            </td>
-                            <td className="overflow-cell">{row.description}</td>
-                            <td>
-                                <ButtonGroup
-                                    size="sm"
-                                    variant="soft"
-                                    buttonFlex={1}
-                                    aria-label="radius button group"
-                                    className="button-group"
-                                >
-                                    <IconButton color="danger" onClick={() => deleteItem(row)}>
-                                        <Delete />
-                                    </IconButton>
-                                </ButtonGroup>
+                    {rowData.length === 0 ? (
+                        // Render the "There are no expenses yet" row when rowData is empty
+                        <tr>
+                            <td colSpan="6" className="no-expenses-td">
+                                There are no expenses yet
                             </td>
                         </tr>
-                    ))}
+                    ) : (
+                        // Render the table rows when rowData is not empty
+                        rowData.map((row, index) => (
+                            <tr key={index} className="table-content">
+                                <td>{row.date}</td>
+                                <td className="overflow-cell">{row.item}</td>
+                                <td className="overflow-cell">{row.price} $</td>
+                                <td>
+                                    <div className="table-cell">
+                                        {icons[row.category]}
+                                        <span className="category-label">{row.category}</span>
+                                    </div>
+                                </td>
+                                <td className="overflow-cell">{row.description}</td>
+                                <td>
+                                    <ButtonGroup
+                                        size="sm"
+                                        variant="soft"
+                                        buttonFlex={1}
+                                        aria-label="radius button group"
+                                        className="button-group"
+                                    >
+                                        <IconButton color="danger" onClick={() => deleteItem(row)}>
+                                            <Delete />
+                                        </IconButton>
+                                    </ButtonGroup>
+                                </td>
+                            </tr>
+                        ))
+                    )}
                     </tbody>
                 </Table>
             </Card>
