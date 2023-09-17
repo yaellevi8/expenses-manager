@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import Filter from "./Filter";
 import AddItem from "./AddItem";
 import ExpenseCounter from "./ExpenseCounter";
-import {addCost, deleteCost, getAllCosts, openCostsDB, updateCost} from "../idb";
+import {addCost, deleteCost, getAllCosts, openCostsDB} from "../idb";
 import Card from "@mui/joy/Card";
 import Table from '@mui/joy/Table';
 import Typography from "@mui/joy/Typography";
@@ -14,41 +14,62 @@ import FoodIcon from "@material-ui/icons/Fastfood";
 import TravelIcon from "@material-ui/icons/Explore";
 import OtherIcon from "@material-ui/icons/MoreHoriz";
 import EducationIcon from "@material-ui/icons/School";
-import HealthlIcon from "@material-ui/icons/LocalHospital";
+import HealthIcon from "@material-ui/icons/LocalHospital";
 
 
+/**
+ * Icon expense categories.
+ * @type {object}
+ */
 const icons = {
         Food: <FoodIcon size="sm"/>,
-        Health: <HealthlIcon size="sm"/>,
+        Health: <HealthIcon size="sm"/>,
         Education: <EducationIcon size="sm"/>,
         Travel: <TravelIcon size="sm"/>,
         Housing: <HouseIcon size="sm"/>,
         Other: <OtherIcon size="sm"/>,
     };
 
-export function createData(date, item, price, category, description) {
-    return { date, item, price, category, description }; // Add isStarred property
+
+/**
+ * Creates a new item object with the given properties.
+ *
+ * @param {string} date - The date associated with the item.
+ * @param {string} item - The name of the item.
+ * @param {number} price - The price of the item.
+ * @param {string} category - The category of the item.
+ * @param {string} description - A description of the item.
+ * @returns {object} A data object containing date, item, price, category, and description.
+ */
+export function createItem(date, item, price, category, description) {
+    return { date, item, price, category, description };
 }
 
+/**
+ * Creates a new filter object with the specified year and month.
+ *
+ * @param {number|null} year - The year to filter by (or null to ignore).
+ * @param {number|null} month - The month to filter by (or null to ignore).
+ * @returns {object} A filter object containing year and month properties.
+ */
 export function createFilter(year, month) {
-    return { year, month }; // Add isStarred property
+    return { year, month };
 }
 
 export default function StyledTable() {
-    const [rowData, setRowData] =  useState([]);
-    const [filter, setFilter] =  useState(null);
-    const [orderDirection, setOrderDirection] = useState("asc");
-    const [totalPrice, setTotalPrice] = useState(0);
     const [db, setDb] = useState(null);
+    const [filter, setFilter] =  useState(null);
+    const [rowData, setRowData] =  useState([]);
+    const [totalPrice, setTotalPrice] = useState(0);
 
-    const fetchDataFromDatabase = (database, filter) => {
-        return getAllCosts(database)
-            .then((data) => {
-                // Apply filtering logic based on the filter
-                return filterDataByFilter(filter, data); // Return the filtered data
-            });
-    };
-
+    /**
+     * This useEffect hook is responsible for opening the IndexedDB database.
+     * It sets the 'db' state with the opened database if successful, and logs an error message if there's an issue.
+     *
+     * @effect
+     * @param {function} openCostsDB - A function that opens the IndexedDB database.
+     * @param {function} setDb - A state setter function for the 'db' state, used to store the database instance.
+     */
     useEffect(() => {
         openCostsDB()
             .then((database) => {
@@ -59,26 +80,16 @@ export default function StyledTable() {
             });
     }, []);
 
-
-    const sortArray = (arr, orderBy) => {
-        switch (orderBy) {
-            case "asc":
-            default:
-                return arr.slice().sort((a, b) =>
-                    a.price > b.price ? 1 : b.price > a.price ? -1 : 0
-                );
-            case "desc":
-                return arr.slice().sort((a, b) =>
-                    a.price < b.price ? 1 : b.price < a.price ? -1 : 0
-                );
-        }
-    };
-
-    const filterTable = (filter) => {
-        console.log('Filter in progress');
-        setFilter(filter);
-    };
-
+    /**
+     * This useEffect hook is responsible for fetching data from the IndexedDB database based on the provided filter.
+     * It triggers data fetching when either the 'db' or 'filter' state changes.
+     *
+     * @effect
+     * @param {object|null} db - The IndexedDB database instance.
+     * @param {object|null} filter - The filter object used to filter the data.
+     * @param {function} fetchDataFromDatabase - A function that fetches data from the database.
+     * @param {function} setRowData - A state setter function for updating the component's data state.
+     */
     useEffect(() => {
         // Check if the database is available
         if (db) {
@@ -94,7 +105,56 @@ export default function StyledTable() {
         }
     }, [db, filter]);
 
+    /**
+     * This useEffect hook is responsible for calculating the total price of items and updating the 'totalPrice' state.
+     * It triggers the calculation whenever the 'rowData' state changes.
+     *
+     * @effect
+     * @param {array} rowData - An array containing the component's data, each item having a 'price' property.
+     * @param {function} setTotalPrice - A state setter function for updating the 'totalPrice' state.
+     */
+    useEffect(() => {
+        // Calculate total price
+        const sum = rowData.reduce(
+            (accumulator, currentRow) => accumulator + currentRow.price,
+            0
+        );
+        setTotalPrice(sum);
+    }, [rowData]);
 
+
+    /**
+     * Fetches data from the database and applies filtering based on the provided filter.
+     *
+     * @param {IDBDatabase} database - The IndexedDB database instance.
+     * @param {object} filter - The filter object used to filter the data.
+     * @returns {Promise<Array>} A Promise that resolves to an array of filtered data.
+     */
+    const fetchDataFromDatabase = (database, filter) => {
+        return getAllCosts(database)
+            .then((data) => {
+                // Apply filtering logic based on the filter
+                return filterDataByFilter(filter, data); // Return the filtered data
+            });
+    };
+
+    /**
+     * Applies a filter to the data table and updates the filter state.
+     *
+     * @param {object} filter - The filter object used to filter the data table.
+     */
+    const filterTable = (filter) => {
+        console.log('Filter in progress');
+        setFilter(filter);
+    };
+
+    /**
+     * Filters data based on a provided filter object.
+     *
+     * @param {object} filter - The filter object used to filter the data.
+     * @param {array} data - The data to be filtered.
+     * @returns {array} - The filtered data.
+     */
     function filterDataByFilter(filter, data) {
         // If filter is null or undefined, return all data
         console.log('filter:', filter);
@@ -103,7 +163,7 @@ export default function StyledTable() {
         }
 
         // Apply filtering logic based on your filter object
-        const filteredData = data.filter((row) => {
+        return data.filter((row) => {
             const dateObject = new Date(row.date);
             const rowYear = dateObject.getFullYear();
             const rowMonth = dateObject.getMonth() + 1;
@@ -122,18 +182,20 @@ export default function StyledTable() {
             }
 
             return false;
-        });
-
-        return filteredData
-
+        })
     }
-    const addNewRow = (newRow) => {
-        // Use a function like 'addCost' to add data to your IndexedDB
-        // Replace 'addCost' with your actual IDB function
-        addCost(db, newRow)
+
+    /**
+     * Adds a new item to the database and updates the component state.
+     *
+     * @param {object} newItem - The new item to be added.
+     */
+    const addNewItem = (newItem) => {
+        // Add data to IndexedDB
+        addCost(db, newItem)
             .then(() => {
                 // Update the component state with the newly added data
-                setRowData((prevRowData) => [...prevRowData, newRow]);
+                setRowData((prevRowData) => [...prevRowData, newItem]);
 
                 // Fetch data from database for row id
                 if (db) {
@@ -148,44 +210,29 @@ export default function StyledTable() {
                 }
             })
             .catch((error) => {
+                // Handle and log any errors that occur during the addition process
                 console.error('Error adding cost:', error);
             });
     };
 
-    const editRow = (originalRow, editedRow) => {
-        // Use the callback function to access the updated rowData
-        const updatedRowData = rowData.map((row) => {
-            if (row === originalRow) {
-                // Update the original row with the edited data
-                return { ...row, ...editedRow }; // Use 'row' instead of 'originalRow'
-            }
-            return row;
-        });
+    /**
+     * Deletes a specific item from the database and updates the component state.
+     *
+     * @param {object} itemToDelete - The item to be deleted.
+     */
+    const deleteItem = (itemToDelete) => {
+        console.log('delete:', itemToDelete);
 
-        // Use the 'updateCost' function to update the record in the database
-        updateCost(db, { ...originalRow, ...editedRow }) // Use 'originalRow' with 'editedRow'
-            .then(() => {
-                // Update the component state with the edited data
-                setRowData(updatedRowData);
-                console.log('Cost updated successfully');
-            })
-            .catch((error) => {
-                console.error('Error updating cost:', error);
-            });
-    };
-
-    const deleteRow = (rowToDelete) => {
-        console.log('delete:', rowToDelete);
-        // Use the callback function to access the updated rowData
-        // Assuming there's an 'id' property in your data that uniquely identifies each record
-        const recordIdToDelete = rowToDelete.id;
+        // Get the record id from itemToDelete
+        const recordIdToDelete = itemToDelete.id;
         console.log('recordIdToDelete: ', recordIdToDelete);
-        console.log('rowToDelete: ', rowToDelete);
+        console.log('rowToDelete: ', itemToDelete);
 
         // Use the 'deleteCost' function to delete the record in the database
         deleteCost(db, recordIdToDelete)
             .then(() => {
                 console.log('db: ', getAllCosts(db));
+
                 // Update the component state to remove the deleted record
                 setRowData((prevRowData) =>
                     prevRowData.filter((row) => row.id !== recordIdToDelete)
@@ -197,24 +244,15 @@ export default function StyledTable() {
             });
     };
 
-    useEffect(() => {
-        // Calculate total price
-        const sum = rowData.reduce(
-            (accumulator, currentRow) => accumulator + currentRow.price,
-            0
-        );
-        setTotalPrice(sum);
-    }, [rowData]);
-
     return (
         <div style={{margin: 'auto'}}>
             <ExpenseCounter totalPrice={totalPrice}/>
             <Card variant="outlined" sx={{ marginTop: '10px', marginBottom: '10px', marginLeft: '20px', marginRight: '20px'}}>
-                <Typography ontSize="lg" fontWeight="lg" level="h4">
+                <Typography variant="h4" fontWeight="bold">
                     Expenses
                 </Typography>
                 <ButtonGroup >
-                    <AddItem addNewRow={addNewRow}/>
+                    <AddItem addNewItem={addNewItem}/>
                     <Filter filterTable={filterTable}/>
                 </ButtonGroup>
                 <Table variant="outlined" aria-label="simple table" sx={{ margin: 'auto' }}>
@@ -251,11 +289,7 @@ export default function StyledTable() {
                                                  marginLeft: 'auto',
                                                  '--ButtonGroup-radius': '40px'
                                              }}>
-                                    {/*<IconButton color="warning" onClick={() => toggleStar(row)}>*/}
-                                    {/*    {row.isStarred ? <Star/> : <StarOutlineIcon />}*/}
-                                    {/*</IconButton>*/}
-                                    {/*<EditItem editRow={editRow} currentItemData={row}/>*/}
-                                    <IconButton color="danger" onClick={() => deleteRow(row)}>
+                                    <IconButton color="danger" onClick={() => deleteItem(row)}>
                                         <Delete />
                                     </IconButton>
                                 </ButtonGroup>

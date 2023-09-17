@@ -2,7 +2,11 @@ const DB_NAME = 'costsdb';
 const DB_VERSION = 1;
 const STORE_NAME = 'costs';
 
-// Function to open the IndexedDB database
+/**
+ * Opens the IndexedDB database for managing cost data.
+ *
+ * @returns {Promise<IDBDatabase>} A promise that resolves to the opened database.
+ */
 export function openCostsDB() {
     return new Promise((resolve, reject) => {
         const request = indexedDB.open(DB_NAME, DB_VERSION);
@@ -26,7 +30,13 @@ export function openCostsDB() {
     });
 }
 
-// Function to add a cost item to IndexedDB
+/**
+ * Adds a cost item to the IndexedDB database.
+ *
+ * @param {IDBDatabase} db - The IndexedDB database.
+ * @param {object} cost - The cost item to be added.
+ * @returns {Promise<void>} A promise that resolves when the cost item is added.
+ */
 export function addCost(db, cost) {
     return new Promise((resolve, reject) => {
         const transaction = db.transaction(STORE_NAME, 'readwrite');
@@ -43,7 +53,12 @@ export function addCost(db, cost) {
     });
 }
 
-// Function to retrieve all cost items from IndexedDB
+/**
+ * Get all cost items from the IndexedDB database.
+ *
+ * @param {IDBDatabase} db - The IndexedDB database.
+ * @returns {Promise<object[]>} A promise that resolves to an array of cost items.
+ */
 export function getAllCosts(db) {
     return new Promise((resolve, reject) => {
         const transaction = db.transaction(STORE_NAME, 'readonly');
@@ -60,24 +75,14 @@ export function getAllCosts(db) {
     });
 }
 
-// Function to update a cost item in IndexedDB
-export function updateCost(db, updatedCost) {
-    return new Promise((resolve, reject) => {
-        const transaction = db.transaction(STORE_NAME, 'readwrite');
-        const store = transaction.objectStore(STORE_NAME);
-        const request = store.put(updatedCost);
 
-        request.onsuccess = () => {
-            resolve();
-        };
-
-        request.onerror = (event) => {
-            reject(event.target.error);
-        };
-    });
-}
-
-// Function to delete a cost item from IndexedDB
+/**
+ * Deletes a cost item from the IndexedDB database.
+ *
+ * @param {IDBDatabase} db - The IndexedDB database.
+ * @param {number} costId - The ID of the cost item to be deleted.
+ * @returns {Promise<void>} A promise that resolves when the cost item is deleted.
+ */
 export function deleteCost(db, costId) {
     return new Promise((resolve, reject) => {
         const transaction = db.transaction(STORE_NAME, 'readwrite');

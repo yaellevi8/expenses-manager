@@ -1,3 +1,6 @@
+/**
+ * An array of numbers representing months from January (1) to December (12).
+ */
 export const MONTHS = [
     1,
     2,
@@ -13,10 +16,10 @@ export const MONTHS = [
     12,
 ];
 
+/**
+ * An array of years starting from 2015 to 2025 (inclusive).
+ */
 export const YEARS = Array.from(
-    { length: (2025 - 2015) / 1 + 1 },
-    (_, index) => 2015 + index * 1
+    { length: (2025 - 2015) + 1 },
+    (_, index) => 2015 + index
 );
-
-
-export const CATEGORIES = ['Food', 'Car', 'Bills', 'Clothes', 'Pets'];

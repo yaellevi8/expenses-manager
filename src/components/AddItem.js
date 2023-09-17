@@ -1,28 +1,31 @@
-import React, { useState, useEffect } from "react";
-import Button from "@mui/joy/Button";
-import Typography from "@mui/joy/Typography";
-import {Add} from "@mui/icons-material";
+import React from "react";
+import { createItem } from './Table';
+import { NumericFormat } from 'react-number-format';
+import PropTypes from 'prop-types';
 import Modal from '@mui/joy/Modal';
-import ModalClose from '@mui/joy/ModalClose';
 import Sheet from '@mui/joy/Sheet';
-import Divider from '@mui/joy/Divider';
 import Input from '@mui/joy/Input';
+import Stack from '@mui/joy/Stack';
+import Button from "@mui/joy/Button";
 import Select from '@mui/joy/Select';
 import Option from '@mui/joy/Option';
-import Stack from '@mui/joy/Stack';
-import PropTypes from 'prop-types';
-import { NumericFormat } from 'react-number-format';
-import FormControl from '@mui/joy/FormControl';
-import { createData } from './Table';
-import FoodIcon from '@material-ui/icons/Fastfood';
-import HealthlIcon from '@material-ui/icons/LocalHospital';
-import EducationIcon from '@material-ui/icons/School';
-import TravelIcon from '@material-ui/icons/Explore';
-import HouseIcon from '@material-ui/icons/House';
-import OtherIcon from '@material-ui/icons/MoreHoriz';
-import ListItemDecorator from '@mui/joy/ListItemDecorator';
+import Divider from '@mui/joy/Divider';
+import {Add} from "@mui/icons-material";
+import Typography from "@mui/joy/Typography";
 import ListDivider from '@mui/joy/ListDivider';
+import FormControl from '@mui/joy/FormControl';
+import HouseIcon from '@material-ui/icons/House';
+import FoodIcon from '@material-ui/icons/Fastfood';
+import TravelIcon from '@material-ui/icons/Explore';
+import OtherIcon from '@material-ui/icons/MoreHoriz';
+import EducationIcon from '@material-ui/icons/School';
+import ListItemDecorator from '@mui/joy/ListItemDecorator';
+import HealthlIcon from '@material-ui/icons/LocalHospital';
 
+/**
+ * Options for item categories including labels and icons.
+ * @type {Array}
+ */
 export const options = [
     { label: 'Food', icon: <FoodIcon size="sm"/> },
     { label: 'Health', icon: <HealthlIcon size="sm"/> },
@@ -33,6 +36,13 @@ export const options = [
 ];
 
 
+/**
+ * Adapts the NumericFormat component as a controlled input.
+ *
+ * @param {object} props - The props passed to the component.
+ * @param {function} ref - The reference to the NumericFormat component.
+ * @returns {JSX.Element} The adapted NumericFormat component.
+ */
 const NumericFormatAdapter = React.forwardRef(function NumericFormatAdapter(
     props,
     ref,
@@ -63,9 +73,16 @@ NumericFormatAdapter.propTypes = {
 };
 
 
+/**
+ * React component for adding a new item.
+ *
+ * @param {object} props - The props passed to the component.
+ * @param {function} props.addNewItem - A callback function to add a new item.
+ * @returns {JSX.Element} The rendered AddItem component.
+ */
 export default function AddItem(props) {
     // Assuming you have access to props
-    const { addNewRow } = props;
+    const { addNewItem } = props;
     const [open, setOpen] = React.useState(false);
     const [itemData, setItemData] = React.useState({
         item: '',
@@ -75,16 +92,22 @@ export default function AddItem(props) {
         category: ''
     });
 
+
+    /**
+     * Handles submission event -> trigger add new item.
+     *
+     * @param {Event} event - The form submission event.
+     */
     function handleSubmit(event) {
         event.preventDefault(); // Prevents the default form submission behavior
         setOpen(false);
         console.log('Item data:', itemData);
         console.log('Item category:', itemData.category);
 
-        const newItem = createData(itemData.date, itemData.item, parseInt(itemData.price), itemData.category, itemData.description);
+        const newItem = createItem(itemData.date, itemData.item, parseInt(itemData.price), itemData.category, itemData.description);
         console.log('newItem:', newItem);
 
-        addNewRow(newItem);
+        addNewItem(newItem);
 
         // Reset itemData to its initial state
         setItemData({
@@ -128,9 +151,8 @@ export default function AddItem(props) {
                         >
                             <div id="item" style={{ display: 'flex', alignItems: 'center' }}>
                                 <Typography
-                                    ontSize="lg"
-                                    fontWeight="lg"
-                                    level="h4"
+                                    fontWeight="bold"
+                                    variant="h4"
                                     sx={{ marginRight: '10px' }} // Add some margin between text and input
                                 >
                                     Item:
@@ -152,7 +174,7 @@ export default function AddItem(props) {
                                                    }}
                                                >
                                                    {options.map((option, index) => (
-                                                       <React.Fragment>
+                                                       <React.Fragment key={index}>
                                                            {index !== 0 ? (
                                                                <ListDivider role="none" inset="startContent" />
                                                            ) : null}
@@ -170,9 +192,8 @@ export default function AddItem(props) {
                             </div>
                             <div id="date" style={{ display: 'flex', alignItems: 'center' }}>
                                 <Typography
-                                    ontSize="lg"
-                                    fontWeight="lg"
-                                    level="h4"
+                                    fontWeight="bold"
+                                    variant="h4"
                                     sx={{ marginRight: '10px', marginTop: '20px' }} // Add some margin between text and input
                                 >
                                     Date:
@@ -187,9 +208,8 @@ export default function AddItem(props) {
                             </div>
                             <div id="price" style={{ display: 'flex', alignItems: 'center' }}>
                                 <Typography
-                                    ontSize="lg"
-                                    fontWeight="lg"
-                                    level="h4"
+                                    fontWeight="bold"
+                                    variant="h4"
                                     sx={{ marginRight: '10px', marginTop: '20px' }} // Add some margin between text and input
                                 >
                                     Price:
@@ -203,6 +223,7 @@ export default function AddItem(props) {
                                         slotProps={{
                                             input: {
                                                 component: NumericFormatAdapter,
+                                                name: 'price',
                                             },
                                         }}
                                         startDecorator={'$'}
@@ -211,9 +232,8 @@ export default function AddItem(props) {
                             </div>
                             <div id="description" style={{ display: 'flex', alignItems: 'center' }}>
                                 <Typography
-                                    ontSize="lg"
-                                    fontWeight="lg"
-                                    level="h4"
+                                    fontWeight="bold"
+                                    variant="h4"
                                     sx={{ marginRight: '10px', marginTop: '20px' }} // Add some margin between text and input
                                 >
                                     Description:

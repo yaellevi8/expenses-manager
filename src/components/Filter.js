@@ -1,12 +1,20 @@
 import * as React from 'react';
+import { createFilter } from './Table';
+import { MONTHS, YEARS } from "../utils/consts";
 import Stack from '@mui/joy/Stack';
 import Button from '@mui/joy/Button';
 import Select from '@mui/joy/Select';
 import Option from '@mui/joy/Option';
 import Divider from '@mui/joy/Divider';
-import { createFilter } from './Table';
-import { MONTHS, YEARS } from "../utils/consts";
 
+
+/**
+ * React component for filtering items data based on selected year and month.
+ *
+ * @param {object} props - The props passed to the component.
+ * @param {function} props.filterTable - A callback function to filter the table data.
+ * @returns {JSX.Element} The rendered filter form component.
+ */
 export default function Filter(props) {
     const { filterTable } = props;
 
@@ -14,7 +22,11 @@ export default function Filter(props) {
     const [selectedYear, setSelectedYear] = React.useState(null);
     const [selectedMonth, setSelectedMonth] = React.useState(null);
 
-    // Handle form submission
+    /**
+     * Handles submission event -> trigger filter.
+     *
+     * @param {Event} event - The form submission event.
+     */
     function handleSubmit(event) {
         event.preventDefault();
 
@@ -26,7 +38,9 @@ export default function Filter(props) {
         filterTable(filterItem);
     }
 
-    // Function to reset the selected values to their initial values
+    /**
+     * Resets the selected year and month to their initial (null).
+     */
     function handleReset() {
         setSelectedYear(null);
         setSelectedMonth(null);
