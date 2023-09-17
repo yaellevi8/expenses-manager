@@ -259,17 +259,17 @@ export default function StyledTable() {
                 <Table variant="outlined" aria-label="simple table" className="table">
                     <thead>
                     <tr>
-                        <th style={{ width: '10%' }}>Date</th>
-                        <th style={{ width: '30%' }}>Item</th>
-                        <th style={{ width: '10%' }}>Price</th>
-                        <th style={{ width: '10%' }}>Category</th>
-                        <th style={{ width: '30%' }}>Description</th>
+                        <th style={{ width: '15%' }}>Date</th>
+                        <th style={{ width: '20%' }}>Item</th>
+                        <th style={{ width: '20%' }}>Price</th>
+                        <th style={{ width: '15%' }}>Category</th>
+                        <th style={{ width: '20%' }}>Description</th>
                         <th style={{ width: '10%' }}></th>
                     </tr>
                     </thead>
                     <tbody>
                     {rowData.map((row, index) => (
-                        <tr key={index}>
+                        <tr key={index} className="table-content">
                             <td>{row.date}</td>
                             <td className="overflow-cell">{row.item}</td>
                             <td className="overflow-cell">{row.price} $</td>

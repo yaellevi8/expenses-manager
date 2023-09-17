@@ -1,8 +1,14 @@
 body .add-item-button {
-    background-color: #d6d3d3;
+    background-color: #525050;
     position: absolute;
     right: 20px;
     top: 10px;
+    padding: 10px 20px;
+    color: #f8fbff;
+}
+
+body .add-item-button:hover {
+    background-color: #3a3838;
 }
 
 .modal {
@@ -24,6 +30,7 @@ body .add-item-button {
 
 .custom-form-label {
     font-weight: bold;
+    margin-left: 10px;
 }
 
 .form-button-stack {

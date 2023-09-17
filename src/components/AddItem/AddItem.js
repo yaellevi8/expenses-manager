@@ -132,7 +132,7 @@ export default function AddItem(props) {
             >
                 <Sheet className="sheet">
                     <form onSubmit={handleSubmit}>
-                        <div className="form-input">
+                        <div className="form-input" >
                             <Typography
                                 className="custom-form-label"
                             >

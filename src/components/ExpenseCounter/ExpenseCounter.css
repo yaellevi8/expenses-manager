@@ -1,16 +1,7 @@
-.card-container {
-    margin: auto;
-}
-
-.card {
-    margin-top: 20px;
-    margin-left: 20px;
-    margin-right: 20px;
-}
-
-.card-content {
-    display: flex;
-    flex-direction: row;
+body .counter-card {
+    margin: 10px 50px;
+    background-color: #d6d3d3;
+    padding: 20px;
 }
 
 body .total-price-label {
@@ -21,4 +12,5 @@ body .total-price-label {
 
 body .total-price-value {
     font-size: larger;
+    color: #32383e;
 }

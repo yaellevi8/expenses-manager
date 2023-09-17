@@ -15,7 +15,7 @@ import CardContent from '@mui/joy/CardContent';
 export default function ExpenseCounter({ totalPrice }) {
     return (
         <div className="card-container">
-            <Card variant="outlined" className="card">
+            <Card variant="outlined" className="counter-card">
                 <div>
                     <CardContent orientation="horizontal" className="card-content">
                         <Typography className="total-price-label">Total Price:</Typography>

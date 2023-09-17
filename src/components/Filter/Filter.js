@@ -64,8 +64,8 @@ export default function Filter(props) {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <Stack direction="row" spacing={1} divider={<Divider orientation="vertical"  />}>
+        <form onSubmit={handleSubmit} >
+            <Stack direction="row" spacing={1}  divider={<Divider orientation="vertical"  />}>
                 <Select
                     placeholder="Select a year"
                     value={selectedYear}
