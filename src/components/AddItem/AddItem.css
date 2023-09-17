@@ -28,9 +28,10 @@ body .add-item-button:hover {
     margin-top: 20px;
 }
 
-.custom-form-label {
+.form-input .custom-form-label {
     font-weight: bold;
     margin-left: 10px;
+    margin-right: 10px;
 }
 
 .form-button-stack {
