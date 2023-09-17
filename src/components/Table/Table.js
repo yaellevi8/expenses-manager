@@ -269,10 +269,10 @@ export default function StyledTable() {
                     </thead>
                     <tbody>
                     {rowData.length === 0 ? (
-                        // Render the "There are no expenses yet" row when rowData is empty
+                        // Render "There are no expenses" row when rowData is empty
                         <tr>
                             <td colSpan="6" className="no-expenses-td">
-                                There are no expenses yet
+                                There are no expenses
                             </td>
                         </tr>
                     ) : (
