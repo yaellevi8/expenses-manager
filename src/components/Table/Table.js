@@ -37,13 +37,13 @@ const icons = {
  *
  * @param {string} date - The date associated with the item.
  * @param {string} item - The name of the item.
- * @param {number} price - The price of the item.
+ * @param {number} sum - The sum of the item.
  * @param {string} category - The category of the item.
  * @param {string} description - A description of the item.
- * @returns {object} A data object containing date, item, price, category, and description.
+ * @returns {object} A data object containing date, item, sum, category, and description.
  */
-export function createItem(date, item, price, category, description) {
-    return { date, item, price, category, description };
+export function createItem(date, item, sum, category, description) {
+    return { date, item, sum, category, description };
 }
 
 /**
@@ -61,7 +61,7 @@ export default function StyledTable() {
     const [db, setDb] = useState(null);
     const [filter, setFilter] =  useState(null);
     const [rowData, setRowData] =  useState([]);
-    const [totalPrice, setTotalPrice] = useState(0);
+    const [totalSum, setTotalSum] = useState(0);
 
     /**
      * This useEffect hook is responsible for opening the IndexedDB database.
@@ -107,20 +107,20 @@ export default function StyledTable() {
     }, [db, filter]);
 
     /**
-     * This useEffect hook is responsible for calculating the total price of items and updating the 'totalPrice' state.
+     * This useEffect hook is responsible for calculating the total sum of items and updating the 'totalSum' state.
      * It triggers the calculation whenever the 'rowData' state changes.
      *
      * @effect
-     * @param {array} rowData - An array containing the component's data, each item having a 'price' property.
-     * @param {function} setTotalPrice - A state setter function for updating the 'totalPrice' state.
+     * @param {array} rowData - An array containing the component's data, each item having a 'sum' property.
+     * @param {function} setTotalSum - A state setter function for updating the 'totalSum' state.
      */
     useEffect(() => {
-        // Calculate total price
+        // Calculate total sum
         const sum = rowData.reduce(
-            (accumulator, currentRow) => accumulator + currentRow.price,
+            (accumulator, currentRow) => accumulator + currentRow.sum,
             0
         );
-        setTotalPrice(sum);
+        setTotalSum(sum);
     }, [rowData]);
 
 
@@ -262,7 +262,7 @@ export default function StyledTable() {
                             <th style={{ width: '20%' }}>Item</th>
                             <th style={{ width: '20%' }}>Description</th>
                             <th style={{ width: '15%' }}>Category</th>
-                            <th style={{ width: '25%' }}>Price </th>
+                            <th style={{ width: '25%' }}>Sum </th>
                             <th style={{ width: '5%' }}></th>
                         </tr>
                     </thead>
@@ -287,7 +287,7 @@ export default function StyledTable() {
                                         <span className="category-label">{row.category}</span>
                                     </div>
                                 </td>
-                                <td className="overflow-cell">${row.price.toLocaleString()}</td>
+                                <td className="overflow-cell">${row.sum.toLocaleString()}</td>
                                 <td>
                                     <ButtonGroup
                                         size="sm"
@@ -307,7 +307,7 @@ export default function StyledTable() {
                     </tbody>
                 </Table>
             </Card>
-            <ExpenseCounter totalPrice={totalPrice} />
+            <ExpenseCounter totalSum={totalSum} />
         </div>
     );
 }

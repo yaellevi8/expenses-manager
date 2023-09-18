@@ -6,21 +6,21 @@ import CardContent from '@mui/joy/CardContent';
 
 
 /**
- * React component for displaying the total price of expenses.
+ * React component for displaying the total sum of expenses.
  *
  * @param {object} props - The props passed to the component.
- * @param {number} props.totalPrice - The total price of expenses to be displayed.
+ * @param {number} props.totalSum - The total sum of expenses to be displayed.
  * @returns {JSX.Element} The rendered expense counter component.
  */
-export default function ExpenseCounter({ totalPrice }) {
+export default function ExpenseCounter({ totalSum }) {
     return (
         <div className="card-container">
             <Card variant="outlined" className="counter-card">
                 <div>
                     <CardContent orientation="horizontal" className="card-content">
-                        <Typography className="total-price-label">Total Price:</Typography>
-                        <Typography className="total-price-value">
-                            ${totalPrice.toLocaleString()}
+                        <Typography className="total-sum-label">Total Sum:</Typography>
+                        <Typography className="total-sum-value">
+                            ${totalSum.toLocaleString()}
                         </Typography>
                     </CardContent>
                 </div>

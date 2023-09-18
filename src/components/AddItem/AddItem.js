@@ -86,7 +86,7 @@ export default function AddItem(props) {
     const [itemData, setItemData] = React.useState({
         item: "",
         date: "",
-        price: "",
+        sum: "",
         description: "",
         category: "",
     });
@@ -102,14 +102,14 @@ export default function AddItem(props) {
         console.log('Item data:', itemData);
         console.log('Item category:', itemData.category);
         console.log('Item item:', itemData.item);
-        const newItem = createItem(itemData.date, itemData.item, parseInt(itemData.price), itemData.category, itemData.description);
+        const newItem = createItem(itemData.date, itemData.item, parseInt(itemData.sum), itemData.category, itemData.description);
         console.log('newItem:', newItem);
         addNewItem(newItem);
         // Reset itemData to its initial state
         setItemData({
             item: '',
             date: '',
-            price: '',
+            sum: '',
             description: '',
             category: ''
         });
@@ -197,18 +197,18 @@ export default function AddItem(props) {
                             <Typography
                                 className="custom-form-label"
                             >
-                                Price:
+                                Sum:
                             </Typography>
                             <FormControl>
                                 <Input
                                     required
-                                    value={itemData.price}
-                                    onChange={(e) => setItemData({ ...itemData, price: e.target.value })}
+                                    value={itemData.sum}
+                                    onChange={(e) => setItemData({ ...itemData, sum: e.target.value })}
                                     placeholder="Amount"
                                     slotProps={{
                                         input: {
                                             component: NumericFormatAdapter,
-                                            name: "price",
+                                            name: "sum",
                                         },
                                     }}
                                     startDecorator={"$"}

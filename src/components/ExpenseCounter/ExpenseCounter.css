@@ -8,7 +8,7 @@ body .counter-card {
     float: right;
 }
 
-body .total-price-label {
+body .total-sum-label {
     font-size: 14px;
     font-weight: 300;
     color: white;
@@ -18,7 +18,7 @@ body .total-price-label {
     left: 8px;
 }
 
-body .total-price-value {
+body .total-sum-value {
     font-size: 26px;
     font-weight: 800;
     color: white;
