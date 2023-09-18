@@ -21,19 +21,19 @@ import TravelIcon from '@material-ui/icons/Explore';
 import OtherIcon from '@material-ui/icons/MoreHoriz';
 import EducationIcon from '@material-ui/icons/School';
 import ListItemDecorator from '@mui/joy/ListItemDecorator';
-import HealthlIcon from '@material-ui/icons/LocalHospital';
+import HealthIcon from '@material-ui/icons/LocalHospital';
 
 /**
  * Options for item categories including labels and icons.
  * @type {Array}
  */
 export const options = [
-    { label: "Food", icon: <FoodIcon size="sm" /> },
-    { label: "Health", icon: <HealthlIcon size="sm" /> },
-    { label: "Education", icon: <EducationIcon size="sm" /> },
-    { label: "Travel", icon: <TravelIcon size="sm" /> },
-    { label: "Housing", icon: <HouseIcon size="sm" /> },
-    { label: "Other", icon: <OtherIcon size="sm" /> },
+    { label: "FOOD", icon: <FoodIcon size="sm" /> },
+    { label: "HEALTH", icon: <HealthIcon size="sm" /> },
+    { label: "EDUCATION", icon: <EducationIcon size="sm" /> },
+    { label: "TRAVEL", icon: <TravelIcon size="sm" /> },
+    { label: "HOUSING", icon: <HouseIcon size="sm" /> },
+    { label: "OTHER", icon: <OtherIcon size="sm" /> },
 ];
 
 /**
@@ -101,6 +101,7 @@ export default function AddItem(props) {
         setOpen(false);
         console.log('Item data:', itemData);
         console.log('Item category:', itemData.category);
+        console.log('Item item:', itemData.item);
         const newItem = createItem(itemData.date, itemData.item, parseInt(itemData.price), itemData.category, itemData.description);
         console.log('newItem:', newItem);
         addNewItem(newItem);
@@ -153,7 +154,12 @@ export default function AddItem(props) {
                                             placeholder="Choose category"
                                             value={itemData.category.value}
                                             onChange={(e) => {
-                                                setItemData({ ...itemData, category: e.target.outerText });
+                                                const selectedOption = e.target.textContent;
+                                                console.log('e.target.value: ', selectedOption);
+                                                setItemData({
+                                                    ...itemData,
+                                                    category: selectedOption,
+                                                });
                                             }}
                                         >
                                             {options.map((option, index) => (
@@ -161,7 +167,7 @@ export default function AddItem(props) {
                                                     {index !== 0 ? (
                                                         <ListDivider role="none" inset="startContent" />
                                                     ) : null}
-                                                    <Option value={option}>
+                                                    <Option value={option.label}>
                                                         <ListItemDecorator>
                                                             {option.icon}
                                                         </ListItemDecorator>

@@ -23,12 +23,12 @@ import HealthIcon from "@material-ui/icons/LocalHospital";
  * @type {object}
  */
 const icons = {
-        Food: <FoodIcon size="sm"/>,
-        Health: <HealthIcon size="sm"/>,
-        Education: <EducationIcon size="sm"/>,
-        Travel: <TravelIcon size="sm"/>,
-        Housing: <HouseIcon size="sm"/>,
-        Other: <OtherIcon size="sm"/>,
+        FOOD: <FoodIcon size="sm"/>,
+        HEALTH: <HealthIcon size="sm"/>,
+        EDUCATION: <EducationIcon size="sm"/>,
+        TRAVEL: <TravelIcon size="sm"/>,
+        HOUSING: <HouseIcon size="sm"/>,
+        OTHER: <OtherIcon size="sm"/>,
     };
 
 
