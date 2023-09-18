@@ -10,7 +10,7 @@ function App() {
                 <img src={logo} className="app-logo" />
                 <h1 className="app-title">Costs Manager App</h1>
             </div>
-            <div style={{ margin: 'auto' }}>
+            <div>
                 <Table />
             </div>
         </div>

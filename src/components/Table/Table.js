@@ -246,7 +246,7 @@ export default function StyledTable() {
                     <AddItem addNewItem={addNewItem} />
                     <Filter filterTable={filterTable} />
                 </ButtonGroup>
-                <Table variant="outlined" aria-label="simple table" className="table">
+                <Table aria-label="simple table" className="table">
                     <thead>
                         <tr>
                             <th style={{ width: '15%' }}>Date</th>
@@ -280,17 +280,14 @@ export default function StyledTable() {
                                 </td>
                                 <td className="overflow-cell">${row.sum.toLocaleString()}</td>
                                 <td>
-                                    <ButtonGroup
-                                        size="sm"
-                                        variant="soft"
-                                        buttonFlex={1}
-                                        aria-label="radius button group"
-                                        className="button-group"
-                                    >
-                                        <IconButton color="danger" onClick={() => deleteItem(row)}>
-                                            <Delete />
-                                        </IconButton>
-                                    </ButtonGroup>
+                                    <IconButton variant="soft"
+                                                buttonFlex={1}
+                                                aria-label="radius button group"
+                                                className="icon-button"
+                                                color="danger"
+                                                onClick={() => deleteItem(row)}>
+                                        <Delete />
+                                    </IconButton>
                                 </td>
                             </tr>
                         ))

@@ -14,7 +14,7 @@ body .custom-typography {
     top: -3px;
 }
 
-.button-group {
+.icon-button {
     display: flex;
     justify-content: space-between;
     margin: 10px 0;

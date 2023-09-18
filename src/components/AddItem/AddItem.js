@@ -116,7 +116,6 @@ export default function AddItem(props) {
         <div className="add-item-container">
             <Button
                 className="add-item-button"
-                variant="outlined"
                 startDecorator={<Add />}
                 onClick={() => setOpen(true)}
             >
@@ -142,7 +141,6 @@ export default function AddItem(props) {
                                 onChange={(e) => setItemData({ ...itemData, item: e.target.value })}
                                 endDecorator={
                                     <div>
-                                        <Divider orientation="vertical" />
                                         <Select
                                             className="select-category"
                                             required

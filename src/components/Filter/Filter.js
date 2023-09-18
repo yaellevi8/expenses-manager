@@ -57,12 +57,12 @@ export default function Filter(props) {
 
     return (
         <form onSubmit={handleSubmit} >
-            <Stack direction="row" spacing={1}  divider={<Divider orientation="vertical"  />}>
+            <Stack className="stack-container" direction="row" spacing={1}  divider={<Divider orientation="vertical"  />}>
                 <Select
+                    className="select"
                     placeholder="Select a year"
                     value={selectedYear}
                     name="year"
-                    sx={{ minWidth: 200 }}
                     onChange={(_, value) => setSelectedYear(value)}
                 >
                     {YEARS.map((year) => (
@@ -72,10 +72,10 @@ export default function Filter(props) {
                     ))}
                 </Select>
                 <Select
+                    className="select"
                     placeholder="Select a month"
                     value={selectedMonth}
                     name="month"
-                    sx={{ minWidth: 200 }}
                     onChange={(_, value) => setSelectedMonth(value)}
                 >
                     {MONTHS.map((month) => (

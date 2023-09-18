@@ -19,3 +19,14 @@ button.filter-button:hover, button.showall-button:hover {
     border-left: unset !important;
     border-right: unset !important;
 }
+
+form .stack-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+form .stack-container .select {
+    min-width: 200px;
+}
