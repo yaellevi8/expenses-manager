@@ -1,6 +1,4 @@
-const DB_NAME = 'costsdb';
-const DB_VERSION = 1;
-const STORE_NAME = 'costs';
+import { DB_NAME, DB_VERSION, STORE_NAME } from "./utils/consts";
 
 /**
  * Opens the IndexedDB database for managing cost data.
@@ -13,7 +11,7 @@ export function openCostsDB() {
 
         request.onupgradeneeded = (event) => {
             const db = event.target.result;
-            // Create an object store (table) for costs
+
             if (!db.objectStoreNames.contains(STORE_NAME)) {
                 db.createObjectStore(STORE_NAME, { keyPath: 'id', autoIncrement: true });
             }

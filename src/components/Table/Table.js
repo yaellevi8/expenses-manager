@@ -98,7 +98,6 @@ export default function StyledTable() {
                 .then((filteredData) => {
                     // Update the component state with the filtered data
                     setRowData(filteredData);
-                    console.log('rowData:', { rowData });
                 })
                 .catch((error) => {
                     console.error('Error fetching data from IDB:', error);
@@ -135,7 +134,7 @@ export default function StyledTable() {
         return getAllCosts(database)
             .then((data) => {
                 // Apply filtering logic based on the filter
-                return filterDataByFilter(filter, data); // Return the filtered data
+                return filterDataByFilter(filter, data);
             });
     };
 
@@ -145,7 +144,6 @@ export default function StyledTable() {
      * @param {object} filter - The filter object used to filter the data table.
      */
     const filterTable = (filter) => {
-        console.log('Filter in progress');
         setFilter(filter);
     };
 
@@ -158,7 +156,6 @@ export default function StyledTable() {
      */
     function filterDataByFilter(filter, data) {
         // If filter is null or undefined, return all data
-        console.log('filter:', filter);
         if (!filter || (filter.year === null && filter.month === null)) {
             return data;
         }
@@ -174,8 +171,6 @@ export default function StyledTable() {
                 return rowMonth === filter.month;
             } else if (filter.year !== null && filter.month === null) {
                 // Filter by year when month is null
-                console.log('row year:', rowYear);
-                console.log('row year:', rowYear === filter.year);
                 return rowYear === filter.year;
             } else if (rowYear === filter.year && rowMonth === filter.month) {
                 // Filter by both year and month when both are specified
@@ -192,6 +187,7 @@ export default function StyledTable() {
      * @param {object} newItem - The new item to be added.
      */
     const addNewItem = (newItem) => {
+        console.log('add item:', newItem);
         // Add data to IndexedDB
         addCost(db, newItem)
             .then(() => {
@@ -222,23 +218,18 @@ export default function StyledTable() {
      * @param {object} itemToDelete - The item to be deleted.
      */
     const deleteItem = (itemToDelete) => {
-        console.log('delete:', itemToDelete);
+        console.log('delete item:', itemToDelete);
 
         // Get the record id from itemToDelete
         const recordIdToDelete = itemToDelete.id;
-        console.log('recordIdToDelete: ', recordIdToDelete);
-        console.log('rowToDelete: ', itemToDelete);
 
         // Use the 'deleteCost' function to delete the record in the database
         deleteCost(db, recordIdToDelete)
             .then(() => {
-                console.log('db: ', getAllCosts(db));
-
                 // Update the component state to remove the deleted record
                 setRowData((prevRowData) =>
                     prevRowData.filter((row) => row.id !== recordIdToDelete)
                 );
-                console.log('Record deleted successfully');
             })
             .catch((error) => {
                 console.error('Error deleting record:', error);
@@ -262,7 +253,7 @@ export default function StyledTable() {
                             <th style={{ width: '20%' }}>Item</th>
                             <th style={{ width: '20%' }}>Description</th>
                             <th style={{ width: '15%' }}>Category</th>
-                            <th style={{ width: '25%' }}>Sum </th>
+                            <th style={{ width: '25%' }}>Sum</th>
                             <th style={{ width: '5%' }}></th>
                         </tr>
                     </thead>

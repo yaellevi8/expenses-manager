@@ -99,11 +99,7 @@ export default function AddItem(props) {
     function handleSubmit(event) {
         event.preventDefault(); // Prevents the default form submission behavior
         setOpen(false);
-        console.log('Item data:', itemData);
-        console.log('Item category:', itemData.category);
-        console.log('Item item:', itemData.item);
         const newItem = createItem(itemData.date, itemData.item, parseInt(itemData.sum), itemData.category, itemData.description);
-        console.log('newItem:', newItem);
         addNewItem(newItem);
         // Reset itemData to its initial state
         setItemData({
@@ -155,7 +151,6 @@ export default function AddItem(props) {
                                             value={itemData.category.value}
                                             onChange={(e) => {
                                                 const selectedOption = e.target.textContent;
-                                                console.log('e.target.value: ', selectedOption);
                                                 setItemData({
                                                     ...itemData,
                                                     category: selectedOption,

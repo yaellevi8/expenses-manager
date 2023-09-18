@@ -1,4 +1,11 @@
 /**
+ * Variables for the library of managing IndexedDB operations (idb).
+ */
+export const DB_NAME = 'costsdb';
+export const DB_VERSION = 1;
+export const STORE_NAME = 'costs';
+
+/**
  * An array of numbers representing months from January (1) to December (12).
  */
 export const MONTHS = [

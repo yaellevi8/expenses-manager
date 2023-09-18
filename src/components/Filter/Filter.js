@@ -30,11 +30,6 @@ export default function Filter(props) {
      */
     function handleSubmit(event) {
         event.preventDefault();
-
-        // Use selectedYear and selectedMonth in your logic
-        console.log('Selected Year:', selectedYear);
-        console.log('Selected Month:', selectedMonth);
-
         const filterItem = createFilter(selectedYear, selectedMonth);
         filterTable(filterItem);
     }
@@ -48,10 +43,7 @@ export default function Filter(props) {
 
         // Use the updated values in the callback function
         setSelectedYear((updatedYear) => {
-            console.log('Selected Year:', updatedYear);
             setSelectedMonth((updatedMonth) => {
-                console.log('Selected Month:', updatedMonth);
-
                 // Create the filter item with the updated values
                 const filterItem = createFilter(updatedYear, updatedMonth);
                 filterTable(filterItem);
