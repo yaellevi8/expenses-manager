@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/expenses-manager/static/css/main.c91bcad9.css",
+    "main.js": "/expenses-manager/static/js/main.56e9dfd3.js",
+    "static/media/title_logo.png": "/expenses-manager/static/media/title_logo.e6d2f3cb1246cd54688d.png",
+    "index.html": "/expenses-manager/index.html",
+    "main.c91bcad9.css.map": "/expenses-manager/static/css/main.c91bcad9.css.map",
+    "main.56e9dfd3.js.map": "/expenses-manager/static/js/main.56e9dfd3.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c91bcad9.css",
+    "static/js/main.56e9dfd3.js"
+  ]
+}
