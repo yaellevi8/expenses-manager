@@ -20,7 +20,7 @@ export default function ExpenseCounter({ totalPrice }) {
                     <CardContent orientation="horizontal" className="card-content">
                         <Typography className="total-price-label">Total Price:</Typography>
                         <Typography className="total-price-value">
-                            {totalPrice} $
+                            ${totalPrice.toLocaleString()}
                         </Typography>
                     </CardContent>
                 </div>

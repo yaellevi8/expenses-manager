@@ -247,7 +247,6 @@ export default function StyledTable() {
 
     return (
         <div className="expense-counter">
-            <ExpenseCounter totalPrice={totalPrice} />
             <Card className="expense-card">
                 <Typography className="custom-typography">
                     Expenses
@@ -261,10 +260,10 @@ export default function StyledTable() {
                         <tr>
                             <th style={{ width: '15%' }}>Date</th>
                             <th style={{ width: '20%' }}>Item</th>
-                            <th style={{ width: '20%' }}>Price</th>
-                            <th style={{ width: '15%' }}>Category</th>
                             <th style={{ width: '20%' }}>Description</th>
-                            <th style={{ width: '10%' }}></th>
+                            <th style={{ width: '15%' }}>Category</th>
+                            <th style={{ width: '25%' }}>Price </th>
+                            <th style={{ width: '5%' }}></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -281,14 +280,14 @@ export default function StyledTable() {
                             <tr key={index} className="table-content">
                                 <td>{row.date}</td>
                                 <td className="overflow-cell">{row.item}</td>
-                                <td className="overflow-cell">{row.price} $</td>
+                                <td className="overflow-cell">{row.description}</td>
                                 <td>
                                     <div className="table-cell">
                                         {icons[row.category]}
                                         <span className="category-label">{row.category}</span>
                                     </div>
                                 </td>
-                                <td className="overflow-cell">{row.description}</td>
+                                <td className="overflow-cell">${row.price.toLocaleString()}</td>
                                 <td>
                                     <ButtonGroup
                                         size="sm"
@@ -308,6 +307,7 @@ export default function StyledTable() {
                     </tbody>
                 </Table>
             </Card>
+            <ExpenseCounter totalPrice={totalPrice} />
         </div>
     );
 }

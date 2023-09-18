@@ -1,14 +1,23 @@
 body .add-item-button {
-    background-color: #525050;
     position: absolute;
-    right: 20px;
-    top: 10px;
-    padding: 10px 20px;
-    color: #f8fbff;
+    right: 17px;
+    top: 60px;
+    background-color: #232323;
+    border: 1px solid #232323;
+    color: #c8dff7;
+    border-radius: 7px;
+    box-shadow: unset;
+    text-transform: uppercase;
+    font-size: 14px;
+    width: 143px;
+    font-weight: 700;
+    transition: all .3s ease;
+    padding: 0;
+    height: 20px;
 }
 
-body .add-item-button:hover {
-    background-color: #3a3838;
+body .add-item-button:hover, .form-button-stack button:hover {
+    background-color: #414141;
 }
 
 .modal {
@@ -30,8 +39,8 @@ body .add-item-button:hover {
 
 .form-input .custom-form-label {
     font-weight: bold;
-    margin-left: 10px;
-    margin-right: 10px;
+    margin: 0 10px;
+    min-width: 100px;
 }
 
 .form-button-stack {
@@ -39,10 +48,29 @@ body .add-item-button:hover {
 }
 
 .form-button-stack button {
-    background-color: #2196F3;
-    color: white;
+    background-color: #232323;
+    border: 1px solid #232323;
+    color: #c8dff7;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: all .3s ease;
 }
 
-.form-button-stack button:hover {
-    background-color: #0a5bbf;
+.MuiSvgIcon-root {
+    font-size: 19px !important;
+}
+
+.css-187ulk2-JoyButton-startDecorator {
+    margin-right: 4px !important;
+}
+
+.css-ntkmf7-JoySheet-root {
+    border-radius: 8px;
+    border: 1px solid #0000003b;
+}
+
+@media (max-width: 1000px) {
+    .add-item-button {
+        top: 10px !important;
+    }
 }

@@ -93,14 +93,12 @@ export default function Filter(props) {
                     ))}
                 </Select>
 
-                {/* Submit button with class name */}
-                <Button type="submit" className="submit-button">
-                    Submit
+                <Button type="submit" className="filter-button">
+                    FILTER
                 </Button>
 
-                {/* Reset button with class name */}
                 <Button type="button" className="showall-button" onClick={handleReset}>
-                    Show all
+                    SHOW ALL
                 </Button>
             </Stack>
         </form>

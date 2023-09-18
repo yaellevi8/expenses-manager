@@ -13,6 +13,14 @@ code {
 }
 
 footer {
-  margin-left: 70px;
-  color: black;
+  color: #b8b8b8;
+  clear: both;
+  margin-right: 52px;
+  text-align: center;
+  background-color: #f7f7f7;
+  position: fixed;
+  left: 0px;
+  width: 100vw;
+  bottom: 0px;
+  border-top: 1px solid #eaeaea;
 }

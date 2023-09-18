@@ -1,25 +1,21 @@
-button.submit-button {
-    background-color: #2196F3;
-    color: white;
-    border: none;
+button.filter-button, button.showall-button {
+    background-color: #ffffff;
+    color: black;
+    border: 1px solid #cdd7e1;
     padding: 10px 20px;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: 30px;
+    box-shadow: unset;
+    text-transform: uppercase;
+    transition: all .3s ease;
 }
 
-button.submit-button:hover {
-    background-color: #0a5bbf;
+button.filter-button:hover, button.showall-button:hover {
+    background-color: #eaeef7;
 }
 
-button.showall-button {
-    background-color: #2196F3;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 4px;
-}
-
-button.showall-button:hover {
-    background-color: #0a5bbf;
+.add-item-container,
+.css-23bzes-JoyButtonGroup-root form {
+    border-left: unset !important;
+    border-right: unset !important;
 }

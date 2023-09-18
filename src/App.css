@@ -1,26 +1,46 @@
 .app-container {
-  padding: 20px;
+  padding: 0px;
 }
 
-/* Style the header as a flex container */
 .app-header {
   display: flex;
-  align-items: center; /* Vertically align logo and title */
-  justify-content: center; /* Horizontally center logo and title */
-  margin-bottom: 20px; /* Add space between header and table */
+  align-items: center;
+  justify-content: left;
+  margin-bottom: 20px;
+  background-color: #232323;
+  padding: 3px 10px 3px 53px;
+  border-bottom: 1px solid #e9e9e9;
+  box-shadow: 0px 0px 6px 0px #e4e4e4;
 }
 
-/* Style the logo */
+.app-structure {
+  padding: 5px 10px 5px 62px;
+  margin-left: -56px;
+  border-radius: 0px 10px 10px 0px;
+  border: 1px solid #00000021;
+  height: 39px;
+  margin-top: -3px;
+  margin-bottom: -3px;
+  border-radius: 0px;
+}
+
 .app-logo {
-  width: 45px; /* Adjust the width as needed */
-  height: auto; /* Maintain aspect ratio */
-  margin-right: 20px; /* Add space between logo and title */
+  width: 35px;
+  height: auto;
+  margin-right: 20px;
+  float: left;
+  position: relative;
+  top: 1px;
 }
 
-/* Style the title */
 .app-title {
   font-size: 24px;
-  color: #2196F3; /* Set your desired title color */
+  color: #000000;
+  font-weight: 300;
+  margin-right: 20px;
+  margin-left: 0px;
+  float: left;
+  color: #c8dff7;
 }
 
 .App {
