@@ -196,7 +196,7 @@ export default function StyledTable() {
      * @param {object} newItem - The new item to be added.
      */
     const addNewItem = (newItem) => {
-        console.log('add item:', newItem);
+        console.debug('add item:', newItem);
         // Add data to IndexedDB
         addCost(db, newItem)
             .then(() => {
@@ -227,7 +227,7 @@ export default function StyledTable() {
      * @param {object} itemToDelete - The item to be deleted.
      */
     const deleteItem = (itemToDelete) => {
-        console.log('delete item:', itemToDelete);
+        console.debug('delete item:', itemToDelete);
 
         // Get the record id from itemToDelete
         const recordIdToDelete = itemToDelete.id;
