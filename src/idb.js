@@ -1,3 +1,8 @@
+/*
+Efi Tzaig, 315852160
+Yael Levi, 207196205
+*/
+
 import { DB_NAME, DB_VERSION, STORE_NAME } from "./utils/consts";
 
 /**

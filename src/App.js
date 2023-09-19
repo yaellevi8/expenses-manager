@@ -1,3 +1,8 @@
+/*
+Efi Tzaig, 315852160
+Yael Levi, 207196205
+*/
+
 import React from 'react';
 import './App.css';
 import Table from "./components/Table/Table";

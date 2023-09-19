@@ -1,3 +1,8 @@
+/*
+Efi Tzaig, 315852160
+Yael Levi, 207196205
+*/
+
 /**
  * Variables for the library of managing IndexedDB operations (idb).
  */

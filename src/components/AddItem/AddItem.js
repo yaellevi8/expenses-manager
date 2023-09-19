@@ -1,5 +1,11 @@
-import React from "react";
+/*
+Efi Tzaig, 315852160
+Yael Levi, 207196205
+*/
+
+import React, {useEffect, useState} from "react";
 import "./AddItem.css";
+import SuccessAlert from '../SuccessAlert/SuccessAlert';
 import { createItem } from '../Table/Table';
 import { NumericFormat } from 'react-number-format';
 import PropTypes from 'prop-types';
@@ -10,7 +16,6 @@ import Stack from '@mui/joy/Stack';
 import Button from "@mui/joy/Button";
 import Select from '@mui/joy/Select';
 import Option from '@mui/joy/Option';
-import Divider from '@mui/joy/Divider';
 import {Add} from "@mui/icons-material";
 import Typography from "@mui/joy/Typography";
 import ListDivider from '@mui/joy/ListDivider';
@@ -91,6 +96,15 @@ export default function AddItem(props) {
         category: "",
     });
 
+    // For create a success message in a dialog when an item is added successfully.
+    const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+
+    useEffect(() => {
+        setTimeout(function () {
+            setShowSuccessAlert(false);
+        }, 2000);
+    }, [showSuccessAlert]);
+
     /**
      * Handles submission event -> trigger add new item.
      *
@@ -109,6 +123,7 @@ export default function AddItem(props) {
             description: '',
             category: ''
         });
+        setShowSuccessAlert(true);
     }
 
 
@@ -229,6 +244,7 @@ export default function AddItem(props) {
                     </form>
                 </Sheet>
             </Modal>
+            <SuccessAlert open={showSuccessAlert} message={"Item added successfully."} onClose={() => setShowSuccessAlert(false)} />
         </div>
     );
 }

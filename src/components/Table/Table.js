@@ -1,7 +1,13 @@
+/*
+Efi Tzaig, 315852160
+Yael Levi, 207196205
+*/
+
 import React, {useEffect, useState} from "react";
 import './Table.css';
 import Filter from "../Filter/Filter";
 import AddItem from "../AddItem/AddItem";
+import SuccessAlert from "../SuccessAlert/SuccessAlert";
 import ExpenseCounter from "../ExpenseCounter/ExpenseCounter";
 import {addCost, deleteCost, getAllCosts, openCostsDB} from "../../idb";
 import Card from "@mui/joy/Card";
@@ -16,6 +22,7 @@ import TravelIcon from "@material-ui/icons/Explore";
 import OtherIcon from "@material-ui/icons/MoreHoriz";
 import EducationIcon from "@material-ui/icons/School";
 import HealthIcon from "@material-ui/icons/LocalHospital";
+
 
 
 /**
@@ -62,6 +69,8 @@ export default function StyledTable() {
     const [filter, setFilter] =  useState(null);
     const [rowData, setRowData] =  useState([]);
     const [totalSum, setTotalSum] = useState(0);
+    // For create a success message in a dialog when an item is deleted successfully.
+    const [showSuccessAlert, setShowSuccessAlert] = useState(false);
 
     /**
      * This useEffect hook is responsible for opening the IndexedDB database.
@@ -230,6 +239,12 @@ export default function StyledTable() {
                 setRowData((prevRowData) =>
                     prevRowData.filter((row) => row.id !== recordIdToDelete)
                 );
+                // Show the success alert message
+                setShowSuccessAlert(true);
+
+                setTimeout(() => {
+                    setShowSuccessAlert(false);
+                }, 2000);
             })
             .catch((error) => {
                 console.error('Error deleting record:', error);
@@ -296,6 +311,7 @@ export default function StyledTable() {
                 </Table>
             </Card>
             <ExpenseCounter totalSum={totalSum} />
+            <SuccessAlert open={showSuccessAlert} message={"Item removed successfully."} onClose={() => setShowSuccessAlert(false)} />
         </div>
     );
 }

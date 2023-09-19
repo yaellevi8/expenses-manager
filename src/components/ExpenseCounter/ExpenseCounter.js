@@ -1,3 +1,8 @@
+/*
+Efi Tzaig, 315852160
+Yael Levi, 207196205
+*/
+
 import * as React from 'react';
 import './ExpenseCounter.css';
 import Card from '@mui/joy/Card';

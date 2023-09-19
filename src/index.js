@@ -1,3 +1,8 @@
+/*
+Efi Tzaig, 315852160
+Yael Levi, 207196205
+*/
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
